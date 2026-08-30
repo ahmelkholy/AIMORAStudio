@@ -262,8 +262,8 @@ int main(int argc, char* argv[]) {
     parser.addOption({QStringLiteral("max-control-frame-bytes"), {}, QStringLiteral("n")});
     parser.addOption({QStringLiteral("max-binary-frame-bytes"), {}, QStringLiteral("n")});
     parser.addOption({QStringLiteral("max-pending-requests"), {}, QStringLiteral("n")});
-    parser.addOption({QStringLiteral("mock-reject-auth")});
-    parser.addOption({QStringLiteral("mock-ignore-auth")});
+    parser.addOption(QCommandLineOption{QStringLiteral("mock-reject-auth")});
+    parser.addOption(QCommandLineOption{QStringLiteral("mock-ignore-auth")});
     parser.addOption(
         {QStringLiteral("mock-crash-once-file"), {}, QStringLiteral("path")}
     );

@@ -23,9 +23,9 @@ constexpr double minimumTextContrast = 4.5;
 }
 
 [[nodiscard]] double relativeLuminance(const QColor& color) noexcept {
-    return (0.2126 * linearizedChannel(color.redF()))
-        + (0.7152 * linearizedChannel(color.greenF()))
-        + (0.0722 * linearizedChannel(color.blueF()));
+    return (0.2126 * linearizedChannel(static_cast<double>(color.redF())))
+        + (0.7152 * linearizedChannel(static_cast<double>(color.greenF())))
+        + (0.0722 * linearizedChannel(static_cast<double>(color.blueF())));
 }
 
 [[nodiscard]] QString cssColor(const QColor& color) {

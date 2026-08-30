@@ -183,7 +183,7 @@ QString ServiceClient::sendRequestInternal(
         return {};
     }
 
-    const QString requestId = nextRequestId();
+    QString requestId = nextRequestId();
     const QByteArray frame = encodeControlMessage(
         makeRequest(requestId, method, std::move(parameters)),
         configuration_.limits
