@@ -17,6 +17,7 @@ concurrency:
 
 env:
   AIMORA_QT_VERSION: "6.11.2"
+  AIMORA_AQT_SOURCE: "git+https://github.com/miurahr/aqtinstall.git@16db45a70b5905ad596941b223469bc86a56901e"
   QT_QPA_PLATFORM: "offscreen"
 
 jobs:
@@ -48,7 +49,7 @@ jobs:
           target: desktop
           cache: true
           setup-python: true
-          aqtversion: "==3.3.*"
+          aqtsource: ${{ env.AIMORA_AQT_SOURCE }}
       - name: Configure
         run: >-
           cmake -S . -B build
@@ -83,7 +84,7 @@ jobs:
           target: desktop
           cache: true
           setup-python: true
-          aqtversion: "==3.3.*"
+          aqtsource: ${{ env.AIMORA_AQT_SOURCE }}
       - name: Install static-analysis tools
         run: |
           sudo apt-get update
@@ -118,7 +119,7 @@ jobs:
           target: desktop
           cache: true
           setup-python: true
-          aqtversion: "==3.3.*"
+          aqtsource: ${{ env.AIMORA_AQT_SOURCE }}
       - name: Configure sanitizer build
         env:
           CC: clang
