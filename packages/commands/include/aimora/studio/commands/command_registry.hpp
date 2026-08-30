@@ -28,7 +28,7 @@ enum class RegistrationResult {
 
 class CommandRegistry final {
 public:
-    [[nodiscard]] RegistrationResult registerCommand(CommandDefinition definition);
+    [[nodiscard]] RegistrationResult registerCommand(const CommandDefinition& definition);
     [[nodiscard]] bool contains(QStringView id) const;
     [[nodiscard]] std::optional<CommandDefinition> find(QStringView id) const;
     [[nodiscard]] QList<CommandDefinition> orderedCommands() const;
