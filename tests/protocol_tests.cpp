@@ -150,10 +150,14 @@ void ProtocolTests::serviceProcessAuthenticatesAndSupportsLifecycle() {
     QVERIFY(allowedRoot.isValid());
     ServiceLaunchConfiguration configuration{
         .program = mockService,
+        .programArguments = {},
         .allowedRoots = {allowedRoot.path()},
+        .workerProgram = {},
+        .workerArguments = {},
         .startupTimeoutMs = 5000,
         .shutdownTimeoutMs = 2000,
         .maximumAutomaticRestarts = 0,
+        .limits = {},
     };
     ServiceProcess process{configuration};
     QSignalSpy failureSpy{&process, &ServiceProcess::failed};
@@ -233,9 +237,12 @@ void ProtocolTests::serviceProcessRejectsAuthenticationFailure() {
         .program = mockService,
         .programArguments = {QStringLiteral("--mock-reject-auth")},
         .allowedRoots = {allowedRoot.path()},
+        .workerProgram = {},
+        .workerArguments = {},
         .startupTimeoutMs = 5000,
         .shutdownTimeoutMs = 1000,
         .maximumAutomaticRestarts = 0,
+        .limits = {},
     };
     ServiceProcess process{configuration};
     process.start();
@@ -252,9 +259,12 @@ void ProtocolTests::serviceProcessTimesOutDuringAuthentication() {
         .program = mockService,
         .programArguments = {QStringLiteral("--mock-ignore-auth")},
         .allowedRoots = {allowedRoot.path()},
+        .workerProgram = {},
+        .workerArguments = {},
         .startupTimeoutMs = 250,
         .shutdownTimeoutMs = 1000,
         .maximumAutomaticRestarts = 0,
+        .limits = {},
     };
     ServiceProcess process{configuration};
     QSignalSpy failureSpy{&process, &ServiceProcess::failed};
@@ -279,9 +289,12 @@ void ProtocolTests::serviceProcessRecoversAfterCrash() {
             crashMarker,
         },
         .allowedRoots = {allowedRoot.path()},
+        .workerProgram = {},
+        .workerArguments = {},
         .startupTimeoutMs = 5000,
         .shutdownTimeoutMs = 2000,
         .maximumAutomaticRestarts = 1,
+        .limits = {},
     };
     ServiceProcess process{configuration};
     QSignalSpy failureSpy{&process, &ServiceProcess::failed};
