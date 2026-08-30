@@ -48,7 +48,7 @@ class StudioDockWidget final : public QDockWidget {
 public:
     StudioDockWidget(
         QString panelId,
-        QString title,
+        const QString& title,
         QWidget* content,
         QWidget* parent = nullptr
     );
@@ -121,22 +121,22 @@ private:
     [[nodiscard]] QMenu* menu(QStringView menuId) const;
     [[nodiscard]] QAction* registerAction(
         QString id,
-        QString label,
-        QString category,
-        QKeySequence shortcut = {}
+        const QString& label,
+        const QString& category,
+        const QKeySequence& shortcut = {}
     );
     [[nodiscard]] StudioDockWidget* addPanel(
         QString panelId,
-        QString title,
+        const QString& title,
         Qt::DockWidgetArea defaultArea,
         QWidget* content
     );
     [[nodiscard]] QWidget* createInformationPanel(
-        QString title,
-        QString description
+        const QString& title,
+        const QString& description
     ) const;
     [[nodiscard]] QWidget* createCommandPanel() const;
-    void addUnavailableAction(QMenu& target, QString explanation);
+    void addUnavailableAction(QMenu& target, const QString& explanation);
 
     themes::ThemeController& themeController_;
     WorkspaceSettings workspaceSettings_;
