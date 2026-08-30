@@ -12,7 +12,7 @@ bool CommandDefinition::isValid() const {
         && !label.trimmed().isEmpty() && !category.trimmed().isEmpty();
 }
 
-RegistrationResult CommandRegistry::registerCommand(CommandDefinition definition) {
+RegistrationResult CommandRegistry::registerCommand(const CommandDefinition& definition) {
     if(!definition.isValid()) {
         return RegistrationResult::InvalidDefinition;
     }
