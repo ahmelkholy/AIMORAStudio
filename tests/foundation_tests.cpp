@@ -58,7 +58,13 @@ void FoundationTests::commandRegistryRejectsInvalidAndDuplicateCommands() {
              static_cast<int>(RegistrationResult::DuplicateId));
     QCOMPARE(registry.size(), qsizetype{1});
     QVERIFY(registry.contains(QStringView{u"file.open"}));
-    QVERIFY(registry.find(QStringView{u"file.open"}).has_value());
+
+    const auto stored = registry.find(QStringView{u"file.open"});
+    QVERIFY(stored.has_value());
+    QCOMPARE(stored->id, open.id);
+    QCOMPARE(stored->label, open.label);
+    QCOMPARE(stored->category, open.category);
+    QCOMPARE(stored->defaultShortcut, open.defaultShortcut);
 }
 
 void FoundationTests::themeModesRoundTrip() {

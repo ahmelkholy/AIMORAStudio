@@ -4,7 +4,6 @@
 #include <QChar>
 
 #include <algorithm>
-#include <utility>
 
 namespace aimora::studio::commands {
 
@@ -21,8 +20,7 @@ RegistrationResult CommandRegistry::registerCommand(CommandDefinition definition
         return RegistrationResult::DuplicateId;
     }
 
-    const QString commandId = definition.id;
-    commands_.insert(commandId, std::move(definition));
+    commands_.insert(definition.id, definition);
     return RegistrationResult::Added;
 }
 
