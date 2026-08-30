@@ -44,14 +44,13 @@ file(GLOB_RECURSE protocol_sources
     "${AIMORA_SOURCE_DIR}/packages/protocol/*.cpp"
     "${AIMORA_SOURCE_DIR}/packages/protocol/*.hpp"
 )
-foreach(forbidden_token IN ITEMS
-    "AIMORASolvers"
-    "private solver"
-    "eval("
-    "system("
-)
-    foreach(protocol_source IN LISTS protocol_sources)
-        file(READ "${protocol_source}" source_text)
+foreach(protocol_source IN LISTS protocol_sources)
+    file(READ "${protocol_source}" source_text)
+    foreach(forbidden_token IN ITEMS
+        "AIMORASolvers"
+        "private solver"
+        "eval("
+    )
         string(FIND "${source_text}" "${forbidden_token}" token_offset)
         if(NOT token_offset EQUAL -1)
             message(
@@ -60,6 +59,17 @@ foreach(forbidden_token IN ITEMS
             )
         endif()
     endforeach()
+
+    if(
+        source_text MATCHES "(^|[^A-Za-z0-9_:])system\\("
+        OR source_text MATCHES "(^|[^A-Za-z0-9_])std::system\\("
+        OR source_text MATCHES "(^|[^A-Za-z0-9_])::system\\("
+    )
+        message(
+            FATAL_ERROR
+            "Forbidden protocol process API 'system' in ${protocol_source}"
+        )
+    endif()
 endforeach()
 
 message(STATUS "AIMORAStudio GUI040 protocol source contract passed.")

@@ -86,6 +86,7 @@ add_test(
     COMMAND
         ${CMAKE_COMMAND}
         -DAIMORA_SOURCE_DIR=${PROJECT_SOURCE_DIR}
+        -DAIMORA_BINARY_DIR=${PROJECT_BINARY_DIR}
         -P ${PROJECT_SOURCE_DIR}/cmake/VerifySourceTree.cmake
 )
 add_test(

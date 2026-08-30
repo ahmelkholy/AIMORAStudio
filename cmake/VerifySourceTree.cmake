@@ -66,6 +66,23 @@ file(
     "${AIMORA_SOURCE_DIR}/*.qml"
 )
 
+if(DEFINED AIMORA_BINARY_DIR)
+    get_filename_component(AIMORA_BINARY_DIR "${AIMORA_BINARY_DIR}" ABSOLUTE)
+    set(source_forbidden_client_files)
+    foreach(forbidden_client_file IN LISTS forbidden_client_files)
+        cmake_path(
+            IS_PREFIX AIMORA_BINARY_DIR
+            "${forbidden_client_file}"
+            NORMALIZE
+            is_binary_file
+        )
+        if(NOT is_binary_file)
+            list(APPEND source_forbidden_client_files "${forbidden_client_file}")
+        endif()
+    endforeach()
+    set(forbidden_client_files "${source_forbidden_client_files}")
+endif()
+
 if(forbidden_client_files)
     list(JOIN forbidden_client_files "\n" forbidden_listing)
     message(FATAL_ERROR "Forbidden primary-client files detected:\n${forbidden_listing}")

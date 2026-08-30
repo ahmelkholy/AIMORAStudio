@@ -22,7 +22,7 @@ struct ServiceLaunchConfiguration final {
     QStringList allowedRoots;
     QString workerProgram;
     QStringList workerArguments;
-    ClientLimits limits;
+    ClientLimits limits{};
     int startupTimeoutMs{15000};
     int shutdownTimeoutMs{3000};
     int maximumAutomaticRestarts{1};
