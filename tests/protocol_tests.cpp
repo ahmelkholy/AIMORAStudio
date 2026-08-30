@@ -154,10 +154,10 @@ void ProtocolTests::serviceProcessAuthenticatesAndSupportsLifecycle() {
         .allowedRoots = {allowedRoot.path()},
         .workerProgram = {},
         .workerArguments = {},
+        .limits = {},
         .startupTimeoutMs = 5000,
         .shutdownTimeoutMs = 2000,
         .maximumAutomaticRestarts = 0,
-        .limits = {},
     };
     ServiceProcess process{configuration};
     QSignalSpy failureSpy{&process, &ServiceProcess::failed};
@@ -239,10 +239,10 @@ void ProtocolTests::serviceProcessRejectsAuthenticationFailure() {
         .allowedRoots = {allowedRoot.path()},
         .workerProgram = {},
         .workerArguments = {},
+        .limits = {},
         .startupTimeoutMs = 5000,
         .shutdownTimeoutMs = 1000,
         .maximumAutomaticRestarts = 0,
-        .limits = {},
     };
     ServiceProcess process{configuration};
     process.start();
@@ -261,10 +261,10 @@ void ProtocolTests::serviceProcessTimesOutDuringAuthentication() {
         .allowedRoots = {allowedRoot.path()},
         .workerProgram = {},
         .workerArguments = {},
+        .limits = {},
         .startupTimeoutMs = 250,
         .shutdownTimeoutMs = 1000,
         .maximumAutomaticRestarts = 0,
-        .limits = {},
     };
     ServiceProcess process{configuration};
     QSignalSpy failureSpy{&process, &ServiceProcess::failed};
@@ -291,10 +291,10 @@ void ProtocolTests::serviceProcessRecoversAfterCrash() {
         .allowedRoots = {allowedRoot.path()},
         .workerProgram = {},
         .workerArguments = {},
+        .limits = {},
         .startupTimeoutMs = 5000,
         .shutdownTimeoutMs = 2000,
         .maximumAutomaticRestarts = 1,
-        .limits = {},
     };
     ServiceProcess process{configuration};
     QSignalSpy failureSpy{&process, &ServiceProcess::failed};
