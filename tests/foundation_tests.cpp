@@ -40,18 +40,19 @@ void FoundationTests::commandRegistryRejectsInvalidAndDuplicateCommands() {
     using aimora::studio::commands::CommandRegistry;
     using aimora::studio::commands::RegistrationResult;
 
+    const QKeySequence openShortcut{QStringLiteral("Ctrl+O"), QKeySequence::PortableText};
     CommandRegistry registry;
     const CommandDefinition invalid{QStringLiteral("file open"),
                                     QStringLiteral("Open"),
                                     QStringLiteral("File"),
-                                    QKeySequence::Open};
+                                    openShortcut};
     QCOMPARE(static_cast<int>(registry.registerCommand(invalid)),
              static_cast<int>(RegistrationResult::InvalidDefinition));
 
     const CommandDefinition open{QStringLiteral("file.open"),
                                  QStringLiteral("Open"),
                                  QStringLiteral("File"),
-                                 QKeySequence::Open};
+                                 openShortcut};
     QCOMPARE(static_cast<int>(registry.registerCommand(open)),
              static_cast<int>(RegistrationResult::Added));
     QCOMPARE(static_cast<int>(registry.registerCommand(open)),
