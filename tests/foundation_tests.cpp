@@ -41,17 +41,20 @@ void FoundationTests::commandRegistryRejectsInvalidAndDuplicateCommands() {
     using aimora::studio::commands::RegistrationResult;
 
     CommandRegistry registry;
+    const QKeySequence shortcut{
+        QKeyCombination{Qt::ControlModifier, Qt::Key_O}
+    };
     const CommandDefinition invalid{QStringLiteral("file open"),
                                     QStringLiteral("Open"),
                                     QStringLiteral("File"),
-                                    QKeySequence::Open};
+                                    shortcut};
     QCOMPARE(static_cast<int>(registry.registerCommand(invalid)),
              static_cast<int>(RegistrationResult::InvalidDefinition));
 
     const CommandDefinition open{QStringLiteral("file.open"),
                                  QStringLiteral("Open"),
                                  QStringLiteral("File"),
-                                 QKeySequence::Open};
+                                 shortcut};
     QCOMPARE(static_cast<int>(registry.registerCommand(open)),
              static_cast<int>(RegistrationResult::Added));
     QCOMPARE(static_cast<int>(registry.registerCommand(open)),
