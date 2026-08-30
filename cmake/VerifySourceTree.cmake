@@ -65,6 +65,10 @@ file(
     "${AIMORA_SOURCE_DIR}/*.cjs"
     "${AIMORA_SOURCE_DIR}/*.qml"
 )
+list(
+    FILTER forbidden_client_files
+    EXCLUDE REGEX "/CMakeFiles/.*/compiler_depend\\.ts$"
+)
 
 if(forbidden_client_files)
     list(JOIN forbidden_client_files "\n" forbidden_listing)
