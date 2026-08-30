@@ -21,7 +21,8 @@ RegistrationResult CommandRegistry::registerCommand(CommandDefinition definition
         return RegistrationResult::DuplicateId;
     }
 
-    commands_.insert(definition.id, std::move(definition));
+    const QString commandId = definition.id;
+    commands_.insert(commandId, std::move(definition));
     return RegistrationResult::Added;
 }
 
